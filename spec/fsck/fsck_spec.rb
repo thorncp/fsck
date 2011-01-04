@@ -29,4 +29,21 @@ describe Fsck do
       obj.the_awesome_method
     end
   end
+  
+  describe "return value" do
+    before :each do
+      @class = Class.new do
+        include Fsck
+        
+        def the_method
+          42
+        end
+      end
+    end
+    
+    it "should return the value from the method" do
+      obj = @class.new
+      obj.the_method_will_obey.should eql(42)
+    end
+  end
 end
