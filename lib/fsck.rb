@@ -5,7 +5,7 @@ module Fsck
     if matches.empty?
       super
     else
-      send matches.first
+      send matches.first, *args, &block
     end
   end
 end

@@ -46,4 +46,21 @@ describe Fsck do
       obj.the_method_will_obey.should eql(42)
     end
   end
+  
+  describe "method parameters" do
+    before :each do
+      @class = Class.new do
+        include Fsck
+        
+        def the_method(*args)
+        end
+      end
+    end
+    
+    it "should pass along all parameters" do
+      obj = @class.new
+      obj.should_receive(:the_method).with(42, [1,2,3], "yo dawg")
+      obj.the_awesome_method(42, [1,2,3], "yo dawg")
+    end
+  end
 end
