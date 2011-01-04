@@ -1,13 +1,12 @@
 require "spec_helper"
 
 describe Fsck do
-  describe "#method_missing" do
+  describe "method is called" do
     before :each do
       @class = Class.new do
         include Fsck
         
         def the_method
-          42
         end
       end
     end
@@ -22,6 +21,12 @@ describe Fsck do
       obj = @class.new
       obj.should_receive(:the_method)
       obj.the_method_is_called
+    end
+    
+    it "should match method with fluff in the middle" do
+      obj = @class.new
+      obj.should_receive(:the_method)
+      obj.the_awesome_method
     end
   end
 end
