@@ -63,4 +63,21 @@ describe Fsck do
       obj.the_awesome_method(42, [1,2,3], "yo dawg")
     end
   end
+  
+  describe "whacky method names" do
+    before :each do
+      @class = Class.new do
+        include Fsck
+        
+        def []
+        end
+      end
+    end
+    
+    it "should pass the regex" do
+      obj = @class.new
+      obj.should_receive(:[])
+      obj.send "square_[]_brackets"
+    end
+  end
 end
