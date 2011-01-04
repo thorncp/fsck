@@ -71,13 +71,22 @@ describe Fsck do
         
         def []
         end
+        
+        def the_method
+        end
       end
     end
     
-    it "should pass the regex" do
+    it "should pass the regex when containing regex special characters" do
       obj = @class.new
       obj.should_receive(:[])
       obj.send "square_[]_brackets"
+    end
+    
+    it "should not match within words" do
+      obj = @class.new
+      obj.should_not_receive(:the_method)
+      obj.the_methods
     end
   end
 end
