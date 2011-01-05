@@ -1,6 +1,10 @@
 # Fsck
 Fsck allows you to express your feelings while you're developing. It does this by allowing you to add words to method names on the fly.
 
+## Installation
+
+    gem install fsck
+
 ## Examples
 Fsck allows you to have a sense of closure during your everyday development life. Here's some examples:
 
