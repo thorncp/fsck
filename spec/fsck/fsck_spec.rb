@@ -1,16 +1,13 @@
 require "spec_helper"
 
 describe Fsck do
-  describe "method is called" do
-    before :each do
-      @class = Class.new do
-        include Fsck
-        
-        def the_method
-        end
-      end
+  before :each do
+    @class = Class.new do
+      include Fsck
     end
+  end
     
+  describe "method is called" do
     it "should match method with fluff at the beginning" do
       obj = @class.new
       obj.should_receive(:the_method)
@@ -31,32 +28,14 @@ describe Fsck do
   end
   
   describe "return value" do
-    before :each do
-      @class = Class.new do
-        include Fsck
-        
-        def the_method
-          42
-        end
-      end
-    end
-    
     it "should return the value from the method" do
       obj = @class.new
+      obj.should_receive(:the_method).and_return(42)
       obj.the_method_will_obey.should eql(42)
     end
   end
   
   describe "method parameters" do
-    before :each do
-      @class = Class.new do
-        include Fsck
-        
-        def the_method(*args)
-        end
-      end
-    end
-    
     it "should pass along all parameters" do
       obj = @class.new
       obj.should_receive(:the_method).with(42, [1,2,3], "yo dawg")
@@ -65,18 +44,6 @@ describe Fsck do
   end
   
   describe "whacky method names" do
-    before :each do
-      @class = Class.new do
-        include Fsck
-        
-        def []
-        end
-        
-        def the_method
-        end
-      end
-    end
-    
     it "should pass the regex when containing regex special characters" do
       obj = @class.new
       obj.should_receive(:[])
