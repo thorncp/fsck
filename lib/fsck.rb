@@ -1,5 +1,9 @@
 module Fsck
   def method_missing(sym, *args, &block)
+    @_fsck_method_name_cache ||= {}
+    
+    return send(@_fsck_method_name_cache[sym], *args, &block) if @_fsck_method_name_cache[sym]
+    
     fscked_method = sym.to_s
     
     if punctuation = fscked_method[/[!?=]$/]
@@ -7,23 +11,20 @@ module Fsck
     end
     
     matches = methods.select do |m|
-      fscked_method =~ /^#{__fsck_cache__(m)}#{punctuation}$/
+      fscked_method =~ /^#{__fsck_method_regex_str__(m)}#{punctuation}$/
     end
 
     if matches.empty?
       super
     else
-      send(matches.sort_by(&:length).last, *args, &block)
+      @_fsck_method_name_cache[sym] = matches.sort_by(&:length).last
+      send(@_fsck_method_name_cache[sym], *args, &block)
     end
   end
   
   private
-  def __fsck_cache__(method)
-    @_fsck_method_name_cache ||= {}
-    
-    return @_fsck_method_name_cache[method] if @_fsck_method_name_cache[method]
-    
+  def __fsck_method_regex_str__(method)
     words = method.to_s.delete("!?=").split("_").map { |w| Regexp.escape(w) }
-    @_fsck_method_name_cache[method] = "(\\w*_)?#{words.join('\w*_\w*')}(_\\w*)?"
+    "(\\w*_)?#{words.join('\w*_\w*')}(_\\w*)?"
   end
 end
