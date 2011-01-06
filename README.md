@@ -65,7 +65,7 @@ Fsck is named after the use of the Unix file system utility, specifically as it 
 
 ## Disclaimer
 
-Your application will take a massive performance hit if you use this gem. The benchmark I ran on Fixnum (bench.rb) shows that using a fscked method is roughly 23485.707692308 slower. That's 23.5k. Use at your own risk.
+Your application will take a more than trivial performance hit if you use this gem. The benchmark I ran on Fixnum (bench.rb) shows that using a fscked method is roughly 20 times slower. This only tests the performance of repeated fscked method calls (which should be most common use). If you're dynamically building a fscked method call based on some variable, you can expect much worse performance. Use at your own risk.
 
 ## License
 MIT License. Copyright 2011 Chris Thorn.
