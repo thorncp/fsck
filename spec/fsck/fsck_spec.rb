@@ -55,5 +55,11 @@ describe Fsck do
       obj.should_not_receive(:the_method)
       obj.the_methods
     end
+    
+    it "should allow fluff at the end of punctuated methods" do
+      obj = @class.new
+      obj.should_receive(:the_method?)
+      obj.the_method_will_be_called?
+    end
   end
 end
