@@ -1,9 +1,5 @@
 module Fsck
   def method_missing(sym, *args, &block)
-    @_fsck_method_name_cache ||= {}
-    
-    return send(@_fsck_method_name_cache[sym], *args, &block) if @_fsck_method_name_cache[sym]
-    
     fscked_method = sym.to_s
     
     if punctuation = fscked_method[/[!?=]$/]
@@ -17,8 +13,9 @@ module Fsck
     if matches.empty?
       super
     else
-      @_fsck_method_name_cache[sym] = matches.sort_by(&:length).last
-      send(@_fsck_method_name_cache[sym], *args, &block)
+      target = singleton_class rescue self.class
+      target.class_exec { alias_method sym, matches.sort_by(&:length).last }
+      send(sym, *args, &block)
     end
   end
   

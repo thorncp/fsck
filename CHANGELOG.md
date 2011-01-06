@@ -1,3 +1,5 @@
+* alias the fscked methods instead of caching
+
 ### 0.0.3
 
 * better caching, better performance
