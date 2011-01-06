@@ -13,8 +13,9 @@ module Fsck
     if matches.empty?
       super
     else
-      target = singleton_class rescue self.class
-      target.class_exec { alias_method sym, matches.sort_by(&:length).last }
+      method = matches.sort_by(&:length).last
+      target = singleton_methods.include?(method) ? singleton_class : self.class
+      target.class_exec { alias_method(sym, method) }
       send(sym, *args, &block)
     end
   end
