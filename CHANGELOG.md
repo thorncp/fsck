@@ -1,3 +1,5 @@
+### 0.0.4
+
 * alias the fscked methods instead of caching
 
 ### 0.0.3
