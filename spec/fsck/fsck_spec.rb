@@ -52,4 +52,24 @@ describe Fsck do
       @obj.the_method_will_be_called?
     end
   end
+  
+  describe "aliasing" do
+    it "should alias method on the first call" do
+      @obj.stub(:the_method)
+      @obj.calling_the_method
+      @obj.methods.should include(:calling_the_method)
+    end
+    
+    it "should alias method defined in the class in the scope of the class" do
+      @obj.class.send(:define_method, :the_method) {}
+      @obj.calling_the_method
+      @obj.class.instance_methods(false).should include(:calling_the_method)
+    end
+    
+    it "should alias singleton method in the scope of the singleton" do
+      @obj.define_singleton_method(:sing_method) {}
+      @obj.calling_sing_method
+      @obj.sinlgeton_methods(false).should include(:calling_sing_method)
+    end
+  end
 end
