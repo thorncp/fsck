@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
   s.description = s.summary
 
   s.rubyforge_project = "fsck"
-  
+
   s.required_ruby_version = "~> 1.9.2"
-  
+
   s.add_development_dependency "rspec", "~> 2.3"
 
   s.files         = `git ls-files`.split("\n")
