@@ -70,4 +70,11 @@ describe Fsck do
       subject.sinlgeton_methods(false).should include(:calling_sing_method)
     end
   end
+
+  describe "respond to" do
+    it "should respond to fsked method" do
+      subject.stub(:the_method?)
+      subject.should respond_to :the_awesome_method?
+    end
+  end
 end
