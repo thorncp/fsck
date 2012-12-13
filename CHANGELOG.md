@@ -1,3 +1,7 @@
+### 0.0.5
+
+* add respond_to_missing support
+
 ### 0.0.4
 
 * alias the fscked methods instead of caching
