@@ -1,4 +1,7 @@
 # Fsck
+
+[![Gem Version](https://badge.fury.io/rb/fsck.png)](http://badge.fury.io/rb/fsck)
+
 Fsck allows you to express your feelings while you're developing. It does this by allowing you to add words to method names on the fly.
 
 ## Installation
