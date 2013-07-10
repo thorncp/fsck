@@ -53,9 +53,9 @@ Fsck also provides a way to use its functionality on every object in ruby.
     
 ## Fsck: How does it work?
 
-Fsck achieves its functionality by tapping into `method_missing`. The first time a fscked method is called, every method defined on the object is examined. The method with the longest name is assumed to be the *intended* method, and the fscked method is aliased to this method.
+Fsck achieves its functionality by tapping into `method_missing`. The first time a fscked method is called, every method defined on the object is examined. The method with the longest name that passes the examination process is assumed to be the *intended* method, and the fscked method is aliased to this method.
 
-The examination process splits the word of each method name, building a regular expression that allows for any number of other words to be inserted anywhere in the method name. If you aren't careful with the words you choose, you may unintentionally call another method.
+The examination process splits the words of each method name, building a regular expression that allows for any number of other words to be inserted anywhere in the method name. If you aren't careful with the words you choose, you may unintentionally call another method.
 
     # you may expect this to call #each, but it will instead call #each_value
     my_hash.what_i_need_is_each_set_of_key_plus_value { |k,v| puts k }
@@ -68,7 +68,7 @@ Fsck is named after the use of the Unix file system utility, specifically as it 
 
 ## Disclaimer
 
-Because Fsck now uses method aliasing, there's only a slight performance hit on the first call to a fscked method. This should be inline with many other gems out there. Performance aside, using this gem will have quite an impact on the maintainability of your code. Use at your own risk.
+This gem is totally a joke. Please don't use it.
 
 ## License
 MIT License. Copyright 2011 Chris Thorn.
